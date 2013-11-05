@@ -56,6 +56,35 @@ def partialDigest(L) :
     L.remove(width)
     X=[0,width] 
     place(L,X,width)    
+        
+def SPDP(full,shorter):
+    full.sort()        
+    if (len(full) % 2) != 0 : 
+        error(' Zle velkosti ')
+    n = len(full)/2
+    X=(n)*[0]    
+    suma=full[0]+full[2*n-1]
+    compShorter = (n+1) * [0]
+    order=2*n*[0]    
+    for i in range(n) :
+        order[i]=(full[i],full[2*n-i-1])
+        order[2*n-i-1]=(full[2*n-i-1],full[i])
+        
+    for k in comb(range(2*n),n) :        
+        combination=n*[0]
+        for i in range(n) :
+            X[i]=order[k[i]][0]                        
+            combination[i]=order[k[i]]
+                                 
+        compShorter[0]=X[0]
+        for i in range(n-1) :
+            compShorter[i+1]=X[i+1]-X[i]
+        compShorter[n]=suma-X[n-1]        
+        if compShorter == shorter :
+            print X,'with orderings',combination,'with indexes',k
+    
+    
+    
 
 # <codecell>
 
@@ -67,8 +96,10 @@ partialDigest([2, 2, 3, 3, 4, 5, 6, 7, 8, 10])
 
 # <codecell>
 
-a=[]
-a==[]
+SPDP([2,14,3,13,7,8,8,9],[2,6,1,4,3])
+
+# <codecell>
+
 
 # <codecell>
 
